@@ -20,7 +20,6 @@ La démarche suit quatre étapes :
 
 Il s'agit d'une analyse rétrospective, qui ne constitue pas une recommandation d'investissement.
 
----
 
 ## 2. Environnement de travail
 
@@ -35,7 +34,6 @@ pip install yfinance pandas numpy matplotlib openpyxl
 
 Le développement et l'exécution se font depuis VS Code avec la commande `python msft_pipeline.py`.
 
----
 
 ## 3. Collecte et nettoyage des données
 
@@ -53,7 +51,6 @@ df = df.dropna(subset=["close", "adj_close"])
 df = df[(df[["open", "high", "low", "close", "adj_close"]] > 0).all(axis=1)]
 ```
 
----
 
 ## 4. Indicateurs de rendement et de risque
 
@@ -86,7 +83,6 @@ alpha = (y.mean() - beta * x.mean()) * 252
 
 Les rendements sont également agrégés par mois et par année. Les périodes incomplètes sont signalées par un indicateur afin de ne pas fausser les moyennes.
 
----
 
 ## 5. Analyse fondamentale de la rentabilité
 
@@ -101,7 +97,6 @@ f["fcf_margin"]       = f["free_cash_flow"] / f["revenue"]
 
 Une table de dates intègre le calendrier fiscal de Microsoft (juillet à juin), ce qui permet de relier les données de marché et les données comptables dans un même modèle.
 
----
 
 ## 6. Export des données
 
@@ -119,7 +114,6 @@ Le script produit un classeur Excel multi-feuilles et un fichier CSV par table :
 
 Un graphique de synthèse à six panneaux (prix et moyennes mobiles, performance relative, drawdown, distribution des rendements, volatilité glissante, rendements annuels) est aussi généré pour contrôler les résultats avant leur import.
 
----
 
 ## 7. Modélisation dans Power BI
 
@@ -147,7 +141,6 @@ VaR 95 = PERCENTILE.INC(Daily[simple_return], 0.05)
 
 Plusieurs écarts entre Python et DAX ont été identifiés et corrigés : le rendement cumulé doit s'appuyer sur le premier et le dernier prix, et non sur les extrêmes ; le Sharpe et la VaR doivent utiliser les rendements simples pour rester cohérents avec le script ; les années partielles sont exclues des moyennes annuelles.
 
----
 
 ## 8. Tableau de bord
 
@@ -161,7 +154,6 @@ Le rapport comporte trois pages denses, construites autour d'une palette cohére
 
 Chaque visuel est titré explicitement, les pourcentages et ratios sont formatés correctement et la source des données est mentionnée en pied de page.
 
----
 
 ## 9. Principaux enseignements
 
@@ -171,7 +163,6 @@ Chaque visuel est titré explicitement, les pourcentages et ratios sont formaté
 - Côté fondamentaux, la croissance du chiffre d'affaires s'accompagne d'une hausse des marges. Les investissements ont toutefois fortement augmenté, ce qui pèse sur la marge de free cash flow et sur le ROE.
 - Le rapprochement entre la hausse du cours et la progression du chiffre d'affaires pose la question de la part due à l'expansion des multiples de valorisation.
 
----
 
 ## 10. Limites et prolongements
 
